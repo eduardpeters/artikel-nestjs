@@ -3,7 +3,7 @@ import { DatabaseService } from './database.service';
 import { ConfigService } from '@nestjs/config';
 import { Pool } from 'pg';
 
-async function databasePoolFactory(configService: ConfigService) {
+function databasePoolFactory(configService: ConfigService) {
   return new Pool({
     user: configService.get('POSTGRES_USER'),
     host: configService.get('POSTGRES_HOST'),
