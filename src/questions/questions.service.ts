@@ -2,9 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { Articles } from 'src/common/types/Articles.enum';
 import { GetQuestionsFilterDto } from './dto/get-questions-filter.dto';
 import { Categories } from 'src/common/types/Categories.enum';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class QuestionsService {
+  constructor(private databaseService: DatabaseService) {}
+
   questions = [
     {
       text: 'Auto',
@@ -25,9 +28,9 @@ export class QuestionsService {
       category: Categories.NOUNS,
     },
   ];
-  getQuestions(filterDto: GetQuestionsFilterDto) {
+  async getQuestions(filterDto: GetQuestionsFilterDto) {
     const { category = 'ALL', amount = 10 } = filterDto;
-    console.log(category, amount);
-    return this.questions;
+    const queryText = 'SELECT * FROM questions';
+    return await this.databaseService.executeQuery(queryText);
   }
 }
