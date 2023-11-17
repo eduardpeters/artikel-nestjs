@@ -8,6 +8,7 @@ async function bootstrap() {
   const PORT = configService.get('PORT');
   const CORS_ORIGIN = configService.get('CORS_ORIGIN');
   app.enableCors({ origin: CORS_ORIGIN });
+  app.enableShutdownHooks();
   await app.listen(PORT);
 }
 bootstrap();
