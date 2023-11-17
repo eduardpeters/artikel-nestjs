@@ -32,6 +32,16 @@
 $ npm install
 ```
 
+### Environment variables
+
+- `PORT`: Port on which server will listen
+- `CORS_ORIGIN`: CORS Allowed origin
+- `POSTGRES_HOST`: Database host address
+- `POSTGRES_USER`: Database username
+- `POSTGRES_PASSWORD`: Database password
+- `POSTGRES_DB`: Database name
+- `POSTGRES_PORT`: Database port to connect to
+
 ## Running the app
 
 ```bash

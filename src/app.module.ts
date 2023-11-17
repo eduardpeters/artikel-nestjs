@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
 import { QuestionsModule } from './questions/questions.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { QuestionsModule } from './questions/questions.module';
       isGlobal: true,
     }),
     QuestionsModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
