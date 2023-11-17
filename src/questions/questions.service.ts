@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { GetQuestionsFilterDto } from './dto/get-questions-filter.dto';
 import { DatabaseService } from 'src/database/database.service';
+import { GetQuestionsFilterDto } from './dto/get-questions-filter.dto';
 
 @Injectable()
 export class QuestionsService {
