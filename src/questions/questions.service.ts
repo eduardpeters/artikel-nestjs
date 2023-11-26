@@ -22,6 +22,7 @@ export class QuestionsService {
   async getNextQuestion() {
     const queryText =
       'SELECT id, text, ARRAY(SELECT name FROM articles) as choices FROM questions;';
-    return await this.databaseService.executeQuery(queryText);
+    const rows = await this.databaseService.executeQuery(queryText);
+    return rows[Math.floor(Math.random() * rows.length)];
   }
 }
