@@ -10,4 +10,9 @@ export class QuestionsController {
   getQuestions(@Query() filterDto: GetQuestionsFilterDto) {
     return this.questionsService.getQuestions(filterDto);
   }
+
+  @Get('next')
+  getNextQuestion() {
+    return this.questionsService.getNextQuestion();
+  }
 }
