@@ -18,4 +18,10 @@ export class QuestionsService {
     const queryText = `SELECT q.text, a.name AS article, ARRAY(SELECT articles.name FROM articles) AS choices FROM questions q JOIN articles a ON q.article = a.id${whereClause} LIMIT $1;`;
     return await this.databaseService.executeQuery(queryText, values);
   }
+
+  async getNextQuestion() {
+    const queryText =
+      'SELECT id, text, ARRAY(SELECT name FROM articles) as choices FROM questions;';
+    return await this.databaseService.executeQuery(queryText);
+  }
 }
