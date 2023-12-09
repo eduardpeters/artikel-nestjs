@@ -19,7 +19,7 @@ export class QuestionsRepository {
       whereClause = ` WHERE articles = $2`;
       values.push(category === Categories.NOUNS ? 0 : 1);
     }
-    const queryText = `SELECT id, text, article FROM questions${whereClause} LIMIT $1;`;
+    const queryText = `SELECT id, text, article FROM questions${whereClause} ORDER BY random() LIMIT $1;`;
     return await this.databaseService.executeQuery(queryText, values);
   }
 }
