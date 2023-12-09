@@ -1,4 +1,8 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { GetQuestionsFilterDto } from './dto/get-questions-filter.dto';
 import { Categories } from 'src/common/types/Categories.enum';
@@ -20,6 +24,18 @@ export class QuestionsRepository {
       values.push(category === Categories.NOUNS ? 0 : 1);
     }
     const queryText = `SELECT id, text, article FROM questions${whereClause} ORDER BY random() LIMIT $1;`;
-    return await this.databaseService.executeQuery(queryText, values);
+    try {
+      const questions = await this.databaseService.executeQuery(
+        queryText,
+        values,
+      );
+      return questions;
+    } catch (error) {
+      this.logger.error(
+        `Failed to get questions. Filters: ${JSON.stringify(filterDto)}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException();
+    }
   }
 }
