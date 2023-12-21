@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { GetArticlesFilterDto } from './dto/get-articles-filter.dto';
+import { ArticlesRepository } from './articles.repository';
 
 @Injectable()
 export class ArticlesService {
-  getArticles(filterDto: GetArticlesFilterDto) {
-    console.log(filterDto);
-    return 'hello world';
+  constructor(private articlesRepository: ArticlesRepository) {}
+
+  async getArticles(filterDto: GetArticlesFilterDto) {
+    return await this.articlesRepository.getArticles(filterDto);
   }
 }
